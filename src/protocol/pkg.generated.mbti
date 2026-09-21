@@ -1,0 +1,70 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "cyang/moonfuse/src/protocol"
+
+// Values
+
+// Errors
+
+// Types and methods
+pub enum Opcode {
+  Lookup
+  Forget
+  Getattr
+  Setattr
+  Readlink
+  Symlink
+  Mknod
+  Mkdir
+  Unlink
+  Rmdir
+  Rename
+  Open
+  Read
+  Write
+  Statfs
+  Release
+  Fsync
+  Readdir
+  Releasedir
+  Fsyncdir
+  Init
+  Interrupt
+  Destroy
+  Create
+  Getxattr
+  Setxattr
+  Listxattr
+  Removexattr
+  Flush
+  Opendir
+  Access
+  BatchForget
+  Fallocate
+}
+pub fn Opcode::from_raw(UInt) -> Self?
+
+pub struct ReplyHeader {
+  length : UInt
+  error : Int
+  unique : UInt64
+}
+
+pub struct Request {
+  header : RequestHeader
+  operation : Opcode?
+  payload : Bytes
+}
+
+pub struct RequestHeader {
+  length : UInt
+  opcode : UInt
+  unique : UInt64
+  nodeid : UInt64
+  uid : UInt
+  gid : UInt
+  pid : UInt
+}
+
+// Type aliases
+
+// Traits
