@@ -1,9 +1,4 @@
 ///|
-import {
-  "cyang/moonfuse/src/protocol",
-}
-
-///|
 /// Classify a request before an adapter invokes filesystem code.
 pub fn classify(request : @protocol.Request) -> @protocol.Opcode? {
   request.operation
