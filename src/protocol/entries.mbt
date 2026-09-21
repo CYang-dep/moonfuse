@@ -17,3 +17,9 @@ pub struct ReadResult {
   pub data : Bytes
   pub eof : Bool
 }
+
+///|
+/// Construct a directory entry returned by a readdir operation.
+pub fn dir_entry(name : String, inode : UInt64, kind : NodeKind) -> DirEntry {
+  { name, inode, kind, }
+}

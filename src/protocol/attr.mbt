@@ -28,3 +28,17 @@ pub fn FileAttr::is_directory(self : FileAttr) -> Bool {
     _ => false
   }
 }
+
+///|
+/// Construct file metadata for filesystem implementations.
+pub fn file_attr(
+  inode : UInt64,
+  size : UInt64,
+  mode : UInt,
+  nlink : UInt,
+  uid : UInt,
+  gid : UInt,
+  kind : NodeKind,
+) -> FileAttr {
+  { inode, size, mode, nlink, uid, gid, kind, }
+}

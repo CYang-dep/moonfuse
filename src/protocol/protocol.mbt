@@ -132,3 +132,13 @@ pub struct Reply {
 pub fn reply(unique : UInt64, error : Int, payload : Bytes) -> Reply {
   { header: reply_header(unique, error, payload.length().to_uint()), payload, }
 }
+
+///|
+/// Construct a request after its fixed header has been decoded.
+pub fn request(
+  header : RequestHeader,
+  operation : Opcode?,
+  payload : Bytes,
+) -> Request {
+  { header, operation, payload, }
+}
