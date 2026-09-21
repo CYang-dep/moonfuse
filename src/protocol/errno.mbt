@@ -1,4 +1,5 @@
-///| Linux errno values used in FUSE replies.
+///|
+/// Linux errno values used in FUSE replies.
 pub enum Errno {
   Success
   NoSuchFile
@@ -11,6 +12,7 @@ pub enum Errno {
   NotImplemented
 }
 
+///|
 pub fn Errno::number(self : Errno) -> Int {
   match self {
     Success => 0

@@ -1,4 +1,5 @@
-///| Filesystem object kind exposed through FUSE attributes.
+///|
+/// Filesystem object kind exposed through FUSE attributes.
 pub enum NodeKind {
   Regular
   Directory
@@ -9,6 +10,7 @@ pub enum NodeKind {
   Socket
 }
 
+///|
 pub struct FileAttr {
   pub inode : UInt64
   pub size : UInt64
@@ -19,6 +21,10 @@ pub struct FileAttr {
   pub kind : NodeKind
 }
 
+///|
 pub fn FileAttr::is_directory(self : FileAttr) -> Bool {
-  match self.kind { Directory => true, _ => false }
+  match self.kind {
+    Directory => true
+    _ => false
+  }
 }
