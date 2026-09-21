@@ -1,0 +1,5 @@
+# NOTICE
+
+MoonFuse is an independent MoonBit implementation informed by public FUSE/libfuse 3 protocol and interface documentation.
+
+The project does not copy libfuse or bazil.org/fuse source code. Their names and trademarks, where used, remain with their respective owners. Before release, the exact upstream URLs and license texts used by the implementation will be recorded here.
