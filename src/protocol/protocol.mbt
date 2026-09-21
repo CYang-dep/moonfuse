@@ -109,3 +109,26 @@ pub fn request_header(
 ) -> RequestHeader {
   { length, opcode, unique, nodeid, uid, gid, pid, }
 }
+
+///|
+/// Construct a reply header with the complete frame length.
+pub fn reply_header(
+  unique : UInt64,
+  error : Int,
+  payload_length : UInt,
+) -> ReplyHeader {
+  { length: 16U + payload_length, error, unique, }
+}
+
+///|
+/// A complete reply frame before transport encoding.
+pub struct Reply {
+  pub header : ReplyHeader
+  pub payload : Bytes
+}
+
+///|
+/// Build a reply and keep the payload immutable for transport adapters.
+pub fn reply(unique : UInt64, error : Int, payload : Bytes) -> Reply {
+  { header: reply_header(unique, error, payload.length().to_uint()), payload, }
+}
