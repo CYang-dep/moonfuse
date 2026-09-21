@@ -95,3 +95,17 @@ pub struct ReplyHeader {
   pub error : Int
   pub unique : UInt64
 }
+
+///|
+/// Construct a request header for decoders in other packages.
+pub fn request_header(
+  length : UInt,
+  opcode : UInt,
+  unique : UInt64,
+  nodeid : UInt64,
+  uid : UInt,
+  gid : UInt,
+  pid : UInt,
+) -> RequestHeader {
+  { length, opcode, unique, nodeid, uid, gid, pid, }
+}

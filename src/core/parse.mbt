@@ -4,13 +4,13 @@ pub fn parse_header(bytes : Bytes) -> @protocol.RequestHeader? {
   if bytes.length() < 40 {
     return None
   }
-  let length = @core.read_u32(bytes, 0)
-  let opcode = @core.read_u32(bytes, 4)
-  let unique = @core.read_u64(bytes, 8)
-  let nodeid = @core.read_u64(bytes, 16)
-  let uid = @core.read_u32(bytes, 24)
-  let gid = @core.read_u32(bytes, 28)
-  let pid = @core.read_u32(bytes, 32)
+  let length = read_u32(bytes, 0)
+  let opcode = read_u32(bytes, 4)
+  let unique = read_u64(bytes, 8)
+  let nodeid = read_u64(bytes, 16)
+  let uid = read_u32(bytes, 24)
+  let gid = read_u32(bytes, 28)
+  let pid = read_u32(bytes, 32)
   match (length, opcode, unique, nodeid, uid, gid, pid) {
     (
       Some(length),
@@ -20,7 +20,10 @@ pub fn parse_header(bytes : Bytes) -> @protocol.RequestHeader? {
       Some(uid),
       Some(gid),
       Some(pid),
-    ) => Some({ length, opcode, unique, nodeid, uid, gid, pid, })
+    ) =>
+      Some(
+        @protocol.request_header(length, opcode, unique, nodeid, uid, gid, pid),
+      )
     _ => None
   }
 }
