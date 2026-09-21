@@ -1,17 +1,41 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "cyang/moonfuse/src/core"
 
+import {
+  "cyang/moonfuse/src/protocol",
+}
+
 // Values
+pub fn classify(@protocol.Request) -> @protocol.Opcode?
+
+pub fn handle(UInt64, UInt64, UInt) -> Handle
+
+pub fn handle_matches(Handle, UInt64) -> Bool
+
+pub fn parse_header(Bytes) -> @protocol.RequestHeader?
+
 pub fn payload_view(Bytes, Int) -> BytesView?
 
 pub fn read_u32(Bytes, Int) -> UInt?
 
 pub fn read_u64(Bytes, Int) -> UInt64?
 
+pub fn retryable(@protocol.Opcode?) -> Bool
+
 // Errors
 
 // Types and methods
+pub struct Handle {
+  id : UInt64
+  inode : UInt64
+  flags : UInt
+}
 
 // Type aliases
 
 // Traits
+pub trait Filesystem {
+  fn lookup(Self, UInt64, String) -> Result[@protocol.FileAttr, @protocol.Errno]
+  fn getattr(Self, UInt64) -> Result[@protocol.FileAttr, @protocol.Errno]
+  fn readdir(Self, UInt64) -> Result[Array[@protocol.DirEntry], @protocol.Errno]
+}

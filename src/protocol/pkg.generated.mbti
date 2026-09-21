@@ -2,10 +2,61 @@
 package "cyang/moonfuse/src/protocol"
 
 // Values
+pub fn dir_entry(String, UInt64, NodeKind) -> DirEntry
+
+pub fn file_attr(UInt64, UInt64, UInt, UInt, UInt, UInt, NodeKind) -> FileAttr
+
+pub fn reply(UInt64, Int, Bytes) -> Reply
+
+pub fn reply_header(UInt64, Int, UInt) -> ReplyHeader
+
+pub fn request(RequestHeader, Opcode?, Bytes) -> Request
+
+pub fn request_header(UInt, UInt, UInt64, UInt64, UInt, UInt, UInt) -> RequestHeader
 
 // Errors
 
 // Types and methods
+pub struct DirEntry {
+  inode : UInt64
+  name : String
+  kind : NodeKind
+}
+
+pub enum Errno {
+  Success
+  NoSuchFile
+  PermissionDenied
+  AlreadyExists
+  NotDirectory
+  IsDirectory
+  InvalidArgument
+  Io
+  NotImplemented
+}
+pub fn Errno::number(Self) -> Int
+
+pub struct FileAttr {
+  inode : UInt64
+  size : UInt64
+  mode : UInt
+  nlink : UInt
+  uid : UInt
+  gid : UInt
+  kind : NodeKind
+}
+pub fn FileAttr::is_directory(Self) -> Bool
+
+pub enum NodeKind {
+  Regular
+  Directory
+  Symlink
+  CharacterDevice
+  BlockDevice
+  Fifo
+  Socket
+}
+
 pub enum Opcode {
   Lookup
   Forget
@@ -42,6 +93,21 @@ pub enum Opcode {
   Fallocate
 }
 pub fn Opcode::from_raw(UInt) -> Self?
+
+pub struct OpenHandle {
+  id : UInt64
+  flags : UInt
+}
+
+pub struct ReadResult {
+  data : Bytes
+  eof : Bool
+}
+
+pub struct Reply {
+  header : ReplyHeader
+  payload : Bytes
+}
 
 pub struct ReplyHeader {
   length : UInt
